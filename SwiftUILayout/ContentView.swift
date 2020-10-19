@@ -94,7 +94,7 @@ struct ShapeView<S: Shape_>: BuiltinView, View_ {
         return proposed
     }
     
-    func render(context: RenderingContext, size: ProposedSize) {
+    func render(context: RenderingContext, size: CGSize) {
         context.saveGState()
         context.setFillColor(color.cgColor)
         context.addPath(shape.path(in: CGRect(origin: .zero, size: size)))
@@ -128,7 +128,7 @@ struct FixedFrame<Content: View_>: View_, BuiltinView {
         let childSize = content._size(proposed: ProposedSize(width: width ?? proposed.width, height: height ?? proposed.height))
         return CGSize(width: width ?? childSize.width, height: height ?? childSize.height)
     }
-    func render(context: RenderingContext, size: ProposedSize) {
+    func render(context: RenderingContext, size: CGSize) {
         context.saveGState()
         let childSize = content._size(proposed: size)
         let x = (size.width-childSize.width)/2
